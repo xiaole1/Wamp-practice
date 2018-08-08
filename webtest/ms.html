@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ms</title>
+		<script type="text/javascript" src="jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$.ajax({
+					type:"get",
+					url:"ms.php",
+					async:true,
+					datatype:"html",
+					success:function(data){
+						var d=document.getElementById("d");
+						d.innerHTML=data;
+					}
+				});
+			})
+		</script>
+	</head>
+	<body>
+		<div id="d">
+			
+		</div>
+	</body>
+</html>

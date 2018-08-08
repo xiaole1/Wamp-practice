@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	</head>
+	<body>
+		<form id="form1" name="form1">
+			<p>name<input type="text" name="name"/></p>
+			<p>gender:<input type="radio" value="1" name="gender"/>male<input type="radio" value="2" name="gender"/>female</p>
+			<p>stu-number:<input type="text" name="number"/></p>
+			<p>photo:<input type="file" name="photo" id="photo"/></p>
+			<p><input type="button" name="b1" value="submit" onclick="fsubmit()"/></p>
+		</form>
+		<div id="result"></div>
+		<script type="text/javascript">
+			//$(jdocument).ready(function(e){
+				function fsubmit(){
+					var form=document.getElementById("form1");
+					var fd=new FormData(form);
+					$.ajax({
+						url:"formdata.php",
+						type:"POST",
+						data:fd,
+						processData:false,//告诉jQuery不要去处理发送的数据
+						contentType:false,//告诉jQuery不要去设置content-type请求的头信息
+						success:function(response,status,xhr){
+							console.log(xhr);
+							var json=$.parseJSON(response);
+							var result='';
+							result+="个人信息：<br/>name:"+json['name']+"<br/>gender:"+json["gender"]+"<br/>number:"+json['number'];
+							result+='<br/>头像：<img src="'+json['photo']+'" height="100" style="border-radius:50%;"/>';
+							$('#result').html(result);
+						}
+					})
+					return false;
+				}
+			//})
+		</script>
+	</body>
+</html>

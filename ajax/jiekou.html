@@ -1,0 +1,43 @@
+8<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>接口调用</title>
+		<link rel="stylesheet" type="text/css" href="css/jiekou.css"/>
+		<script type="text/javascript"src="js/jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				//提取内容
+				$.ajax({
+					url:"http://www.qhdlink.com/stutest/teacher.php",
+					type:"post",
+					async:true,
+					dataType:"json",
+					data:{username:"admin",pwd:"admin"},
+					success:function(data){
+//						console.log(data);
+						//添加
+						var str="";
+						$.each(data, function(index,msg) {
+							str+='<div class="teacher"><img src="http://www.qhdlink.com/'+msg.pic+'"/><h3>'+msg.names+'</h3><div class="info"><h4>'+msg.title+'</h4><p>'+msg.info+'</p></div></div>';
+						});
+						$("#contents").append($(str));
+					},
+					complete:function(){
+						//特效
+						$(".teacher").hover(function(){
+							$(this).children(".info").stop(true,true).slideDown(500);
+						},function(){
+							$(this).children(".info").stop(true,true).slideUp(500);
+						})
+					}
+				});
+			})
+		</script>
+	</head>
+	<body>
+		<div id="contents">
+			
+		</div>
+	</body>
+</html>

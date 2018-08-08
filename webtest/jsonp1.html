@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jsonp1</title>
+		<script type="text/javascript" src="jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+			function jsonpCallback(re){
+				console.log(re);
+				var d=document.getElementById("a");
+				str="";
+				str+='<input type="text" value="'+re.n+'"><br><input type="text" value="'+re.p+'">';
+				d.innerHTML=str;
+			}
+		</script>
+	</head>
+	<body>
+		<div id="a"></div>
+		<script type="text/javascript" src="jsonp1.php?callback=jsonpCallback"></script>
+	</body>
+</html>

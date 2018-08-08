@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>script</title>
+		<script type="text/javascript" src="jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+				$.ajax({
+					type:"GET",
+					url:"script.php",
+					async:true,
+					dataType:"script",
+					success:function(data){
+						var str="<table>";
+//						console.log(note);
+						$.each(note,function(index,el) {
+							str+='<tr><td>'+note[1].name+'</td><td>'+note[1].age+'</td></tr>';
+						});
+						str+="</table>";
+						console.log(str);
+						$('#aa').html(str);
+					}
+				})
+		</script>
+	</head>
+	<body>
+		<div id="aa">
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>测试</title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+	<h2>留言板</h2>
+	<textarea id="msg" name="msg" cols="50" rows="8"></textarea><br>
+	<input type="button" value="添加留言" onclick="addMsg();">
+	<input type="button" value="清除留言" onclick="clearMsg();"><br>
+	<table style="width: 500px;">
+		<tr>
+			<th>留言内容</th>
+			<th>留言时间</th>
+		</tr>
+		<tbody id="show">
+			
+		</tbody>
+	</table>
+	<script type="text/javascript">
+		//加载留言信息
+		var loadMsg=function(){
+			var tb=document.getElementById("show");
+			tb.innerHTML="";
+			//遍历所有留言
+			for(let i=0;i<localStorage.length;i++){
+				var key=localStorage.key(i);
+				var value=localStorage.getItem(key);
+				//json
+				var msg=JSON.parse(value);
+				var row=tb.insertRow(i);
+				row.insertCell(0).innerHTML=msg.content;
+				row.insertCell(1).innerHTML=msg.times;
+			}
+		}
+		var addMsg=function(){
+			var msgElement=document.getElementById("msg");
+			var time=new Date();
+			var t=time.getTime();
+			//以当前时间key来保存信息
+			var msg={
+				content:msgElement.value,
+				times:time.toLocaleDateString()+"&nbsp;"+time.toLocaleTimeString(),
+			}
+			localStorage.setItem(t,JSON.stringify(msg));
+			msgElement.value="";
+			// alert("数据已保存");
+			loadMsg();
+		}
+		var clearMsg=function(){
+			localStorage.clear();
+			// alert("全部留言信息已被清除");
+			loadMsg();
+		}
+		window.onload=loadMsg();
+	</script>
+</body>
+</html>

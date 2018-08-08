@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function setCookie($name,$value,$day){
+			    var data=$name+"="+encodeURL($value);//拼凑数据 变量名=值
+			    var myDate=new Date();
+			    var mSecond=$day*24*3600*1000;
+			    myDate.setTime(myDate.getTime()+mSecond);//设置获得时间戳
+			    data=data+";expires="+myDate.toGMTString();//变量名=值;expires=时间
+			    document.cookie=data;//创建cookie
+			}
+			setCookie("wangsan","123456",7);//调用函数，创建cookie
+		</script>
+	</body>
+</html>

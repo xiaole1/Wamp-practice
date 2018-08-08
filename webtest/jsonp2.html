@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jsonp2</title>
+		<script type="text/javascript" src="jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$.ajax({
+					type:"get",
+					url:"jsonp2.php",
+					async:false,
+					dataType:"jsonp",
+					jsonpCallback:"jsonpCallback",
+					jsonp:"jsonpCallback",
+					success:function(data){
+						console.log(data);
+						$.each(data,function(index,ca){
+							
+							$('div').append('<h1>'+ca.title+'</h1>');
+							$('div').append('<p>'+ca.t+'</p>')
+						})
+					}
+				});
+			})
+		</script>
+	</head>
+	<body>
+		<div id="a">
+			
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>二级菜单</title>
+		<link rel="stylesheet" type="text/css" href="css/menu.css"/>
+		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$.ajax({
+					url:"http://localhost/ajax/menu.php",
+					type:"GET",
+					dataType:"json",
+					async:false,
+					success:function(data){
+						console.log(data);
+						var obj=eval("("+data+")");
+						var str="<ul>";
+						$.each(obj, function(index,msg) {
+							if(msg.type=="1"){
+								var str_c="";
+								$.each(msg.children_m,function(index,cl){
+									str_c+='<li style="padding-left:15px;"><a href="'+cl.addr_c+'">'+cl.title_c+'</a></li>';
+								});
+								str+='<li><a href="'+msg.addr_m+'">'+msg.title_m+'</a><ul>'+str_c+'</ul></li>';
+								
+							}else{
+								str+='<li><a href="'+msg.addr_m+'">'+msg.title_m+'</a></li>';
+							}
+						});
+						str+="</ul>";
+						$("#contents").append($(str));
+					},
+					complete:function(){
+						$("#contents").children("ul").children("li:has(ul)").mouseenter(function(){
+							$(this).children("ul").show(500);
+						}).mouseleave(function(){
+							$(this).children("ul").hide(500);
+						})
+					}
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div id="contents">
+			<!--<ul>
+				<li><a href="http://www.baidu.com">百度</a></li>
+				<li>
+					<a href="http://www.qq.com">腾讯</a>
+					<ul>
+						<li><a href="http://news.qq.com/">新闻</a></li>
+						<li><a href="http://finance.qq.com/">财经</a></li>
+						<li><a href="http://ent.qq.com/">财经</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="http://www.163.com/">网易</a>
+					<ul>
+						<li><a href="http://news.163.com/">新闻</a></li>
+						<li><a href="http://money.163.com/">财经</a></li>
+						<li><a href="http://ent.163.com/">财经</a></li>
+					</ul>
+				</li>
+			</ul>-->
+		</div>
+	</body>
+</html>

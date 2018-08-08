@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jsonp</title>
+		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+		
+	</head>
+	<body>
+		<div id="msg">
+			
+		</div>
+		<script type="text/javascript">
+			//原生js的写法
+			function jsonpfn(re){
+				console.log(re);
+				str="";
+				var d=document.getElementById("msg");
+				for(var i in re){
+					str="姓名:"+re[1].name_s+",性别:"+re[1].sex_s;
+				}
+				console.log(str);
+				d.innerHTML=str;
+			}	
+		</script>
+		<script type="text/javascript">
+//			$(document).ready(function(){
+//				$.ajax({
+//					url:"http://localhost/ajax/json.php",
+//					type:"json"
+//				})
+//			})
+		</script>
+		<script type="text/javascript" src="http://localhost/ajax/json.php?callback=jsonpfn">
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,92 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery-3.3.1.js"></script>
+</head>
+<body>
+	<style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: "micsoft yahei","微软雅黑";
+            font-size: 15px;
+        }
+        div{
+            width: 50px;
+            height: 50px;
+            background: #f00;
+            border-radius:5px ;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            cursor: pointer;
+            position:  absolute;
+            top: 60px;
+            left: 30px;
+        }
+        input{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 3px;
+            cursor: pointer;
+        }
+    </style>
+	 <input type="button" value="原路返回">
+ <div></div>
+<script type="text/javascript">
+          //1、以鼠标在div上点击触发为开始
+          //2、点击鼠标移动时触发鼠标移动事件 向数组内注入数据（移动的坐标）
+          //3、以鼠标从div上移开为结束
+          //4、点击“原路返回”按钮遍历数组（移动的坐标） 定时触发数组内的坐标移动div 达到”返回“的功能
+            window.onload=function(){
+                var oDiv=document.getElementsByTagName("div")[0];
+                var oBtn=document.getElementsByTagName("input")[0];
+                var time=null,arrTop=[],arrLeft=[];
+                oDiv.onmousedown=function(ev){
+                    var event=ev || window.event;
+                    //获取鼠标在div内的坐标
+                    var disX=event.clientX-oDiv.offsetLeft;
+                    var disY=event.clientY-oDiv.offsetTop;
+                    arrTop=[60];
+                    arrLeft=[30];
+                    document.onmousemove=function(ev){
+                        var event=ev || window.event;
+                        //获取拖拽后鼠标的位置
+                        var l=event.clientX;
+                        var t=event.clientY;
+                        //把拖拽后的位置存进数组里面，用拖拽后鼠标的位置减去鼠标在物体上的位置，就是拖拽后物体的位置
+                        arrLeft.push(l-disX);
+                        arrTop.push(t-disY);
+                        oDiv.style.left=l-disX +"px";
+                        oDiv.style.top=t-disY +"px";
+                    };
+                    document.onmouseup=function(){
+                        document.onmousemove=null;
+                        document.onmouseup=null;
+                    };
+                    return false;
+                }
+                //原路返回的核心就是把移动时的坐标记录下来，然后进行数组重排，并设定定时器把数组内的搞宽赋值给物体。
+                oBtn.onclick=function(){
+                    arrTop.reverse();//重排
+                    arrLeft.reverse();//重排
+                    var i=0;
+                    oBtn.time=setInterval(function(){
+                        oDiv.style.top=arrTop[i]+"px";
+                        oDiv.style.left=arrLeft[i]+"px";
+                        i++;
+                        if(i==arrTop.length){
+                            clearInterval(oBtn.time);
+                            arrTop=[];
+                            arrLeft=[];
+                        }
+                    },20);
+                }
+            }
+    </script>
+
+
+</body>
+</html>

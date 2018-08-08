@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>ajax测试</title>
+		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#but").click(function(){
+					$.ajax({
+						url:"c_ajax.php",
+						dataType:"html",
+						type:"POST",
+						async:false,
+						data:{names:$("#uname").val()},
+						success:function(data){
+							$("#meg").html(data);
+						},
+						error:function(e){
+							alert(e);
+						}
+					})
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<h3 align="center">ajax测试</h3>
+		<form action="">
+			用户名：<input type="text" name="username" id="uname"/><br />
+			<input type="button" name="but" id="but" value="测试"/>
+			<p id="meg"></p>
+		</form>
+		<script type="text/javascript">
+//			var xmlHttp=false;
+//			if(window.ActiveXObject){
+//				xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+//			}else if(window.XMLHttpRequest){
+//				xmlHttp=new XMLHttpRequest();
+//			}
+//			function reAjax(){
+//				var postmsg="names="+document.getElementById("uname").value
+//				xmlHttp.open("POST","c_ajax.php",true);
+//				xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+//				xmlHttp.onreadystatechange=checkname;
+//				xmlHttp.send(postmsg);
+//			}
+//			function checkname(){
+////				alert(xmlHttp.readyState);
+////				alert(xmlHttp.status);
+//				if(xmlHttp.readyState==4 && xmlHttp.status==200){
+//					document.getElementById("meg").innerHTML=xmlHttp.responseText;
+//				}else{
+//					document.getElementById("meg").innerHTML="请检查网络";
+//				}
+//			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<?php
+require("conn.php");
+?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/select.css" />
+	</head>
+	<body>
+		<h3>内容查看</h3>
+		<?php
+		$sql="select * from stu";
+		$rs=mysql_query($sql,$conn);
+		$arr=mysql_fetch_array($rs);
+//		print_r($arr);
+		do{?>
+		<div>
+			<span>姓名：132</span>
+			<span>性别：女</span>
+			<span>年龄：13</span>
+			<p>地址：看到手机放</p>
+		</div>
+		<?php
+			
+				
+		}while($arr=mysql_fetch_array($rs));
+		mysql_free_result($rs);
+		mysql_clase($conn);
+?>
+	</body>
+</html>

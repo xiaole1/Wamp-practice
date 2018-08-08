@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>nav</title>
+		<script type="text/javascript" src="jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+//			$(document).ready(function(){
+//				$.ajax({
+//					type:"get",
+//					url:"nav.php",
+//					async:true,
+//					datatype:"html",
+//					success:function(data){
+//						var obj=eval("("+data+")");
+//						var str="<ul>";
+//						$.each(obj,function(index,msg)){
+//							$.each(msg,function(index,vv)){
+//								if(vv.child==null||vv.child==""){
+//									str+='<li>'+msg.p_id+'</li><li>'+msg.p_type'</li>';
+//								}else{
+//									$.each(vv.child, function(iindex,zz) {
+//										var str_a="";
+//										str_a+='<ul><li>'+zz+'</li></ul>';
+//									});
+//								}
+//								str+=
+//							}
+//						}
+//						
+//					}
+//				});
+//			})
+		</script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$.ajax({
+				url:"nav.php",
+				type:"get",
+				dataType:"html",
+				async:false,
+				success:function(data){
+					var obj=eval('('+data+')');
+					var str="<ul>";
+					$.each(obj,function(index,kl){
+						$.each(kl,function(ind,val){
+							if(val.child=="" || val.child==null){
+								str+='<li><a href="">'+val.p_type+'</a></li>';
+							}else{
+								var str_a="<ul>";
+								$.each(val.child,function(index,sed){
+									str_a+='<li><a href="">'+sed+'</a></li>';
+								});
+								str_a+="</ul>";
+								str+='<li><a href="">'+val.p_type+'</a>'+str_a+'</li>';
+							}
+							
+						})
+					})
+					str+="</ul>";
+					console.log(str);
+					$("#nav").append($(str));
+				},
+			})
+		})
+</script>
+	</head>
+	<body>
+		<div id="nav">
+			
+		</div>
+	</body>
+</html>
