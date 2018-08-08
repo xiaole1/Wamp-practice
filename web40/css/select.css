@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{
+	margin:0 auto;
+}
+h3{
+	text-align:center;
+	color:#060;
+	margin-bottom:20px;
+}
+.contents{
+	width:980px;
+	margin-bottom:20px;
+	border:solid 1px #040;
+	background:#060;
+	padding:10px;
+}
+.contents>.txt{
+	font-size:20px;
+	padding:5px 10px;
+	background:#afa;
+	margin:10px;
+}
+.contents>a{
+	font-size:20px;
+	padding:5px 10px;
+	color:#f00;
+	font-weight:bold;
+	margin:10px;
+}
+.contents>a:hover{
+	color:#ff0;
+}
+.contents>p{
+	margin:5px 10px;
+	font-size:20px;
+	color:#ccc;
+	line-height:36px;
+}
